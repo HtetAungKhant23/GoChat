@@ -10,4 +10,10 @@ createDB:
 dropDB:
 	docker exec -it postgres15 dropdb go-chat
 
-.PHONY: postgersinit postgres createDB dropDB
+migrateup:
+	cd ./db/migrations; goose postgres postgresql://root:password@localhost:5433/go-chat up
+
+migratedown:
+	cd ./db/migrations; goose postgres postgresql://root:password@localhost:5433/go-chat down
+
+.PHONY: postgersinit postgres createDB dropDB migrateup migratedown
