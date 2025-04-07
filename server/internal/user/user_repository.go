@@ -22,11 +22,12 @@ func NewRepository(db DBTX) Repository {
 
 func (repo *repository) CreateUser(ctx context.Context, user *User) (*User, error) {
 	var newUser User
-	query := `INSERT INTO users(username, email, password, created_at, updated_at) VALUES($1, $2, $3, $4, $5) RETURNING *`
+	query := `INSERT INTO users(id, username, email, password, created_at, updated_at) VALUES($1, $2, $3, $4, $5, $6) RETURNING *`
 
 	err := repo.db.QueryRowContext(
 		ctx,
 		query,
+		user.ID,
 		user.UserName,
 		user.Email,
 		user.Password,
