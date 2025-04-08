@@ -35,4 +35,5 @@ type Repository interface {
 }
 
 type Service interface {
+	CreateUserService(c context.Context, req *CreateUserReq) (*CreateUserRes, error)
 }
