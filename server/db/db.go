@@ -5,6 +5,7 @@ import (
 	"errors"
 	"os"
 
+	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 )
 
@@ -13,13 +14,15 @@ type Database struct {
 }
 
 func NewDatabase() (*Database, error) {
+	godotenv.Load()
+
 	dbURL := os.Getenv("DB_URL")
 
 	if dbURL == "" {
 		return nil, errors.New("DB_URL is not found in env")
 	}
 
-	db, err := sql.Open("postgres", dbURL)
+	db, err := sql.Open("postgres", "postgresql://root:password@localhost:5433/go-chat?sslmode=disable")
 	if err != nil {
 		return nil, err
 	}

@@ -16,4 +16,7 @@ migrateup:
 migratedown:
 	cd ./db/migrations; goose postgres postgresql://root:password@localhost:5433/go-chat down
 
-.PHONY: postgersinit postgres createDB dropDB migrateup migratedown
+run:
+	cd ./cmd; go run .
+
+.PHONY: postgersinit postgres createDB dropDB migrateup migratedown run
